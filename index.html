@@ -4,29 +4,234 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kittehnaut: Space Kitty Rider</title>
-<meta name="description" content="Draw a path through space and send your cat sliding, flipping and warping along it.">
-<link rel="stylesheet" href="style.css">
+<meta name="description" content="Draw a line through space, press Ride, and your cat rides it. A drawing and riding game for phones and tablets.">
+<meta name="theme-color" content="#120F2A">
+<link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kittehnaut">
+<meta property="og:title" content="Kittehnaut: Space Kitty Rider">
+<meta property="og:description" content="Draw a line through space, press Ride, and your cat rides it.">
+<meta property="og:image" content="https://kittehnaut.app/img/og.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta property="og:image:alt" content="Kittehnaut: an orange cat in a space helmet riding a drawn line through the stars">
+<meta property="og:url" content="https://kittehnaut.app/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kittehnaut.app/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#120F2A; --nebula:#2A1A4A; --ink:#F5EEE6; --ink-soft:rgba(245,238,230,.74);
+    --orange:#E8933E; --gold:#FFE27A; --pink:#E8909A; --green:#5FB86A; --blue:#6AA9E8;
+    --card:#1E1A3D; --line:rgba(245,238,230,.16); --edge:rgba(245,238,230,.85);
+    --shadow:0 6px 0 rgba(0,0,0,.4);
+    --gap:16px; --per:2;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; color:var(--ink);
+    background:
+      radial-gradient(ellipse at 18% 12%, var(--nebula) 0, transparent 55%),
+      radial-gradient(ellipse at 85% 70%, #3A1A45 0, transparent 50%),
+      var(--night);
+    background-attachment:fixed;
+    font-family:'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size:17px; line-height:1.55; overflow-x:hidden;
+  }
+  /* A sprinkle of stars, drawn rather than fetched. */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.7;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 33% 72%, #fff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 58% 9%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 77% 41%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 91% 83%, #FFE27A 50%, transparent 51%),
+      radial-gradient(1px 1px at 46% 54%, #fff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 6% 88%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 69% 93%, #fff 50%, transparent 51%);
+    background-size:420px 420px;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:0 20px}
+  header{text-align:center; padding:clamp(32px,7vw,56px) 0 8px}
+  h1{
+    font-weight:900; font-size:clamp(46px,11vw,92px); margin:0; letter-spacing:-.01em;
+    color:var(--orange); line-height:1.05;
+  }
+  .tagline{font-weight:900; font-size:clamp(19px,4.5vw,26px); color:var(--gold); margin:4px 0 0; letter-spacing:.02em}
+  .lede{max-width:580px; margin:22px auto 0; font-size:clamp(16px,4vw,19px)}
+  .cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin:28px 0 8px}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:#fff;
+    font-weight:900; padding:11px 24px; border-radius:16px; border:2px solid var(--edge);
+    box-shadow:var(--shadow); font-size:clamp(16px,4vw,19px); line-height:1.2; text-align:left;
+  }
+  .btn svg{width:22px; height:22px; flex:none; fill:#fff}
+  .btn small{display:block; font-weight:700; font-size:.72em; opacity:.85; letter-spacing:.03em; text-transform:uppercase}
+  .btn:active{transform:translateY(3px); box-shadow:0 3px 0 rgba(0,0,0,.4)}
+  .btn-ios{background:var(--orange)}
+  .btn-play{background:var(--green)}
+  .note{color:var(--ink-soft); font-size:clamp(14px,3.6vw,16px); text-align:center; margin:8px 0 0}
+
+  .gallery{position:relative; margin:clamp(28px,6vw,44px) auto 10px; max-width:1400px}
+  .shots{
+    display:grid; grid-auto-flow:column;
+    grid-auto-columns:calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));
+    gap:var(--gap); overflow-x:auto; scroll-snap-type:x proximity;
+    scroll-behavior:smooth; -webkit-overflow-scrolling:touch;
+    padding:6px 20px 10px; scroll-padding-left:20px;
+    scrollbar-width:none;
+  }
+  .shots::-webkit-scrollbar{display:none}
+  .shots figure{margin:0; scroll-snap-align:start; text-align:center}
+  .shots img{
+    width:100%; height:auto; display:block; border-radius:clamp(12px,2.4vw,20px);
+    border:2px solid var(--edge); box-shadow:var(--shadow); background:var(--card);
+  }
+  .shots figcaption{font-size:clamp(14px,3.4vw,16px); color:var(--ink-soft); margin-top:10px}
+  .nav{
+    position:absolute; top:calc(50% - 20px); transform:translateY(-50%);
+    width:46px; height:46px; border-radius:50%; border:2px solid var(--edge);
+    background:var(--card); color:var(--ink); box-shadow:var(--shadow);
+    font-size:24px; line-height:1; cursor:pointer; display:grid; place-items:center;
+    font-family:inherit; font-weight:900; padding:0 0 4px;
+  }
+  .nav[disabled]{opacity:.3; cursor:default; box-shadow:none}
+  .nav.prev{left:2px} .nav.next{right:2px}
+  /* Landscape shots: two to a row, then one with a peek of the next. */
+  @media (max-width:640px){ :root{--per:1.12; --gap:12px} .nav{width:38px; height:38px; font-size:20px} }
+
+  section{padding:clamp(24px,6vw,36px) 0}
+  h2{font-size:clamp(25px,6vw,34px); font-weight:900; margin:0 0 18px; text-align:center}
+  .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+  .card{
+    background:var(--card); border:2px solid var(--edge); border-radius:18px;
+    padding:18px 20px; box-shadow:var(--shadow);
+  }
+  .card h3{margin:0 0 6px; font-size:20px; font-weight:900}
+  .card p{margin:0; color:var(--ink-soft)}
+  .card .dot{
+    display:inline-block; width:14px; height:14px; border-radius:50%;
+    border:2px solid var(--edge); margin-right:8px; vertical-align:-1px;
+  }
+  .fine{max-width:620px; margin:26px auto 0; text-align:center; color:var(--ink-soft)}
+  footer{
+    text-align:center; padding:40px 0 56px; color:var(--ink-soft); font-size:15px;
+    border-top:2px solid var(--line); margin-top:30px;
+  }
+  footer a{color:inherit}
+</style>
 </head>
 <body>
-<div class="wrap">
-<h1>Kittehnaut</h1>
-<p class="tagline">Space Kitty Rider</p>
 
-<p>Draw a path through space and send your cat sliding, flipping and warping
-along it. Build loops, jumps and switchbacks, then throw in boosts, bounce
-pads, portals, cannons, pinball flippers, path switches, gear trains and
-black holes, and watch your cat ride the lot.</p>
+<header class="wrap">
+  <h1>Kittehnaut</h1>
+  <p class="tagline">Space Kitty Rider</p>
+  <p class="lede">
+    Draw a line through space, press Ride, and your cat rides it. Build loops,
+    jumps and switchbacks, fill the sky with boosts, portals, cannons and
+    black holes, and watch your cat ride the lot.
+  </p>
+  <div class="cta">
+    <a class="btn btn-ios" href="https://apps.apple.com/app/id6823748521">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.37 1.43c0 1.14-.42 2.2-1.26 3.02-.94.93-2.06 1.47-3.05 1.38a3.2 3.2 0 0 1-.02-.36c0-1.1.47-2.2 1.28-2.99.83-.82 2.03-1.42 3.03-1.46.01.14.02.27.02.41zM20.9 17.1c-.5 1.16-.74 1.67-1.38 2.7-.9 1.43-2.16 3.2-3.73 3.22-1.39.01-1.75-.9-3.64-.89-1.89.01-2.28.91-3.67.9-1.57-.01-2.77-1.62-3.66-3.04-2.5-4-2.77-8.7-1.22-11.2 1.1-1.77 2.83-2.8 4.46-2.8 1.66 0 2.7.9 4.08.9 1.33 0 2.14-.9 4.06-.9 1.45 0 2.99.79 4.08 2.16-3.59 1.96-3 7.08.62 8.95z"/></svg>
+      <span><small>Coming soon</small>iPhone &amp; iPad</span>
+    </a>
+    <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=dev.kittehnaut.app">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2.2v19.6c0 .82.9 1.32 1.6.9l16-9.8c.67-.41.67-1.39 0-1.8l-16-9.8c-.7-.42-1.6.08-1.6.9z"/></svg>
+      <span><small>Coming soon</small>Android</span>
+    </a>
+  </div>
+  <p class="note">Draw a line. Ride it to the stars.</p>
+</header>
 
-<p>Dress your cat for the trip with helmets, hats, moustaches, capes and
-whole-cat themes from zombie to galaxy. Save your levels, replay your best
-runs in slow motion, and send a level to a friend as a code they can open
-in their own game.</p>
-
-<div class="card">
-<p><strong>Coming soon</strong> to Google Play and the App Store.</p>
+<div class="gallery">
+  <button class="nav prev" type="button" aria-label="Previous screenshots">&lsaquo;</button>
+  <div class="shots" id="shots">
+    <figure><img src="img/02_ride.webp" alt="A cat in a space helmet riding a drawn line through a ring of fire, past boosts, yarn and gears" width="1200" height="675"><figcaption>Draw it, then ride it</figcaption></figure>
+    <figure><img src="img/03_build.webp" alt="Building a level with the items palette open" width="1200" height="675"><figcaption>A whole palette of space stuff</figcaption></figure>
+    <figure><img src="img/06_black_hole.webp" alt="A cat orbiting a black hole after a cannon shot, with fireworks bursting" loading="lazy" width="1200" height="675"><figcaption>Cannons, fireworks and a black hole</figcaption></figure>
+    <figure><img src="img/04_designer.webp" alt="The Kitteh Designer, with a galaxy cat in a wizard hat and star glasses" loading="lazy" width="1200" height="675"><figcaption>Design your own Kitteh</figcaption></figure>
+    <figure><img src="img/05_store.webp" alt="The store, with hats for your cat priced in fish" loading="lazy" width="1200" height="675"><figcaption>Spend your fish on hats and more</figcaption></figure>
+    <figure><img src="img/01_menu.webp" alt="The Kittehnaut main menu with an orange cat in a space helmet" loading="lazy" width="1200" height="675"><figcaption>Pick a cat and go</figcaption></figure>
+  </div>
+  <button class="nav next" type="button" aria-label="More screenshots">&rsaquo;</button>
 </div>
 
-<footer><a href="privacy.html">Privacy</a><a href="support.html">Support</a></footer>
-</div>
+<main class="wrap">
+  <section>
+    <h2>How it goes</h2>
+    <div class="grid">
+      <div class="card">
+        <h3><span class="dot" style="background:var(--orange)"></span>Draw, then Ride</h3>
+        <p>One finger draws a line through space. Press Ride and your cat slides along it. Two fingers move and zoom.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--green)"></span>Boosts and bounces</h3>
+        <p>Boosts, bounce pads, trampolines, rings of fire, yarn, stars, fireworks, portals and low-gravity zones.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--pink)"></span>Big rides</h3>
+        <p>Cannons, gear trains, loop-the-loops, pinball flippers, path switches, fiery gates, a UFO's tractor beam and a black hole.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--blue)"></span>Watch it back</h3>
+        <p>Every ride is a replay. Slow it down or rewind to see exactly how that jump went.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--gold)"></span>Kitteh Designer</h3>
+        <p>Design and name your cats. Helmets and hats, glasses, moustaches, capes, sweaters, tutus and whole-cat themes.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--orange)"></span>Fish and the store</h3>
+        <p>Rides earn fish, and there's a daily bonus. Spend them on new things for your cat.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--green)"></span>Save and share</h3>
+        <p>Keep your levels, and send one to a friend as a level code they can open in their own game.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--pink)"></span>Achievements</h3>
+        <p>Something to aim for, through Google Play Games or Game Center.</p>
+      </div>
+    </div>
+    <p class="fine">For phones and tablets, no account needed. Free to play, with ads
+    and optional in-app purchases, including a one-off Remove ads.</p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p><a href="privacy.html">Privacy</a> &middot; <a href="support.html">Support</a></p>
+</footer>
+
+<script>
+  (function () {
+    var strip = document.getElementById('shots');
+    var prev = document.querySelector('.nav.prev');
+    var next = document.querySelector('.nav.next');
+    function page() {
+      var fig = strip.querySelector('figure');
+      var gap = parseFloat(getComputedStyle(strip).columnGap) || 16;
+      var step = fig.getBoundingClientRect().width + gap;
+      var visible = Math.max(1, Math.floor((strip.clientWidth - 40 + gap) / step));
+      return step * visible;
+    }
+    function update() {
+      var max = strip.scrollWidth - strip.clientWidth - 2;
+      prev.disabled = strip.scrollLeft <= 2;
+      next.disabled = strip.scrollLeft >= max;
+    }
+    prev.addEventListener('click', function () { strip.scrollBy({ left: -page(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { strip.scrollBy({ left: page(), behavior: 'smooth' }); });
+    strip.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
+
 </body>
 </html>
