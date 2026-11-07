@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kittehnaut: Space Kitty Rider</title>
-<meta name="description" content="Draw a line through space, press Ride, and your cat rides it. A drawing and riding game for phones and tablets.">
+<meta name="description" content="Draw a line through space, press Ride, and your cat rides it. 100 levels, a sandbox full of loops, portals and cannons, and a wardrobe for your cat. For phones and tablets.">
 <meta name="theme-color" content="#120F2A">
 <link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -146,9 +146,9 @@
   <h1>Kittehnaut</h1>
   <p class="tagline">Space Kitty Rider</p>
   <p class="lede">
-    Draw a line through space, press Ride, and your cat rides it. Build loops,
-    jumps and switchbacks, fill the sky with boosts, portals, cannons and
-    black holes, and watch your cat ride the lot.
+    Draw a line through space, press Ride, and your cat rides it. Work through
+    100 levels, or head into Freerider and fill the sky with loops, portals,
+    cannons and black holes, and watch your cat ride the lot.
   </p>
   <div class="cta">
     <a class="btn btn-ios" href="https://apps.apple.com/app/id6823748521">
@@ -174,11 +174,13 @@
   <button class="nav prev" type="button" aria-label="Previous screenshots">&lsaquo;</button>
   <div class="shots" id="shots">
     <figure><img src="img/02_ride.webp" alt="A cat in a space helmet riding a drawn line through a ring of fire, past boosts, yarn and gears" width="1200" height="675"><figcaption>Draw it, then ride it</figcaption></figure>
-    <figure><img src="img/03_build.webp" alt="Building a level with the items palette open" width="1200" height="675"><figcaption>A whole palette of space stuff</figcaption></figure>
+    <figure><img src="img/07_levels.webp" alt="The Levels screen, with levels cleared, one skipped and the next ones locked" width="1200" height="675"><figcaption>100 levels in ten sections</figcaption></figure>
+    <figure><img src="img/08_level.webp" alt="A cat going round a loop-the-loop on level 69, Mousetrap" loading="lazy" width="1200" height="675"><figcaption>Get your cat to the finish</figcaption></figure>
+    <figure><img src="img/03_build.webp" alt="Building a level in Freerider with the items palette open" loading="lazy" width="1200" height="675"><figcaption>A whole palette of space stuff</figcaption></figure>
     <figure><img src="img/06_black_hole.webp" alt="A cat orbiting a black hole after a cannon shot, with fireworks bursting" loading="lazy" width="1200" height="675"><figcaption>Cannons, fireworks and a black hole</figcaption></figure>
     <figure><img src="img/04_designer.webp" alt="The Kitteh Designer, with a galaxy cat in a wizard hat and star glasses" loading="lazy" width="1200" height="675"><figcaption>Design your own Kitteh</figcaption></figure>
     <figure><img src="img/05_store.webp" alt="The store, with hats for your cat priced in fish" loading="lazy" width="1200" height="675"><figcaption>Spend your fish on hats and more</figcaption></figure>
-    <figure><img src="img/01_menu.webp" alt="The Kittehnaut main menu with an orange cat in a space helmet" loading="lazy" width="1200" height="675"><figcaption>Pick a cat and go</figcaption></figure>
+    <figure><img src="img/01_menu.webp" alt="The Kittehnaut main menu, with Freerider and Levels" loading="lazy" width="1200" height="675"><figcaption>Pick a cat and go</figcaption></figure>
   </div>
   <button class="nav next" type="button" aria-label="More screenshots">&rsaquo;</button>
 </div>
@@ -192,12 +194,20 @@
         <p>One finger draws a line through space. Press Ride and your cat slides along it. Two fingers move and zoom.</p>
       </div>
       <div class="card">
+        <h3><span class="dot" style="background:var(--gold)"></span>100 levels</h3>
+        <p>Ten sections, from First steps to Nine lives. Use the lines and items each level gives you to reach the finish. Stuck? Watch a short ad to skip one.</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot" style="background:var(--blue)"></span>Freerider</h3>
+        <p>The sandbox. Build whatever you like, as big as you like, and save it for later.</p>
+      </div>
+      <div class="card">
         <h3><span class="dot" style="background:var(--green)"></span>Boosts and bounces</h3>
-        <p>Boosts, bounce pads, trampolines, rings of fire, yarn, stars, fireworks, portals and low-gravity zones.</p>
+        <p>Boosts, bounce pads, trampolines, fans, rings of fire, yarn, stars, balloons, honey, ice, grind rails, moving platforms, portals and low-gravity zones.</p>
       </div>
       <div class="card">
         <h3><span class="dot" style="background:var(--pink)"></span>Big rides</h3>
-        <p>Cannons, gear trains, loop-the-loops, pinball flippers, path switches, fiery gates, a UFO's tractor beam and a black hole.</p>
+        <p>Cannons, catapults, gear trains, loop-the-loops, pinball flippers, trapdoors, chompers, a laser pointer, a UFO's tractor beam and a black hole.</p>
       </div>
       <div class="card">
         <h3><span class="dot" style="background:var(--blue)"></span>Watch it back</h3>
@@ -209,7 +219,7 @@
       </div>
       <div class="card">
         <h3><span class="dot" style="background:var(--orange)"></span>Fish and the store</h3>
-        <p>Rides earn fish, and there's a daily bonus. Spend them on new things for your cat.</p>
+        <p>Rides and first clears earn fish, and there's a daily bonus. Spend them on new things for your cat, and on unlocking items for Freerider.</p>
       </div>
       <div class="card">
         <h3><span class="dot" style="background:var(--green)"></span>Save and share</h3>
@@ -231,7 +241,7 @@
 
 <script>
   // YouTube loads only when the video is played, so a visit alone sends
-  // nothing to Google.
+  // it nothing.
   (function () {
     var video = document.getElementById('video');
     video.addEventListener('click', function (e) {

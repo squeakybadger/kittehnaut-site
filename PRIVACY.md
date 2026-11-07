@@ -1,12 +1,12 @@
 # Kittehnaut privacy policy
 
-_Last updated 16 October 2026. The same policy is at https://kittehnaut.app/privacy.html._
+_Last updated 7 November 2026. The same policy is at https://kittehnaut.app/privacy.html._
 
-Kittehnaut: Space Kitty Rider is a game about drawing paths for a cat to ride through space. It has no accounts, no sign-in, and no server of its own. We never see your cats, your levels, or anything else you do in the game.
+Kittehnaut: Space Kitty Rider is a game about drawing paths for a cat to ride through space. It has no accounts of its own and no server of its own. We never see your cats, your levels, or anything else you do in the game.
 
 ## What stays on your device
 
-Everything the game keeps (the cats you design and what they wear, the levels you build, your fish, the items you own, and your settings) is stored on your phone or tablet by the app itself. None of it reaches us: there is no Kittehnaut server, and we have no copy of any of it. Uninstalling the game deletes it.
+Everything the game keeps (the cats you design and what they wear, the levels you build, your progress through the game's levels, your fish, the items you own, and your settings) is stored on your phone or tablet by the app itself. None of it reaches us: there is no Kittehnaut server, and we have no copy of any of it. Uninstalling the game deletes it.
 
 ## Your age
 
@@ -18,7 +18,7 @@ You can share a level you have built. The game turns the level into a code and h
 
 ## Advertising
 
-Kittehnaut shows two kinds of ad, both supplied by Google AdMob. After several minutes of play, a full-screen ad may appear at a break, such as after a ride ends, never in the middle of one. You can also choose to watch a short ad to put towards an item in the store. A one-off purchase removes the full-screen ads. Ads are the only part of the game that uses the network.
+Kittehnaut shows two kinds of ad, both supplied by Google AdMob. After several minutes of play, a full-screen ad may appear at a break, such as after a ride ends, never in the middle of one. You can also choose to watch a short ad to put towards an item or to skip a level. A one-off purchase removes the full-screen ads. Ads and, for players 13 and over, achievements (below) are the only parts of the game that use the network.
 
 **If you are under 13,** every ad request is marked as directed at a child. Google then serves only ads suitable for children (rated G), does not personalise them or use them to track you, and restricts the information it collects. The game does not show a consent form or a tracking prompt to players under 13.
 
@@ -26,13 +26,21 @@ Kittehnaut shows two kinds of ad, both supplied by Google AdMob. After several m
 
 That processing is Google's, described in [Google's privacy & terms](https://policies.google.com/technologies/partner-sites) and the [AdMob policies](https://support.google.com/admob/answer/6128543). We receive no personal information from it.
 
+## Achievements
+
+If you are 13 or over, the game signs in to Google Play Games on Android or Game Center on iOS, using the account you have with them, and sends them the achievements you earn. That is handled by Google or Apple under their own privacy policies, and we receive nothing from it. If you are under 13, the game does not sign in, send or store any of this.
+
 ## Purchases
 
 You can buy packs of fish (the game's currency), bundles of items for your cat, and a one-off purchase that removes ads, with real money. Each purchase is handled entirely by Apple or Google; we never see your payment details. Parents can control purchases through Apple's Ask to Buy, Google Play's purchase authentication and family settings.
 
 ## What the game doesn't do
 
-No accounts or sign-in. No chat or contact with other players. No analytics, crash reporting or tracking of our own. Nothing you make is sent anywhere unless you share it yourself.
+No accounts of our own. No chat or contact with other players. No analytics, crash reporting or tracking of our own. Nothing you make is sent anywhere unless you share it yourself.
+
+## This website
+
+This site has no analytics or cookies of its own. Its font comes from Google Fonts, so Google sees your IP address when a page loads. The gameplay video on the home page loads from YouTube only if you press play. Both are covered by [Google's privacy policy](https://policies.google.com/privacy).
 
 ## Children
 
