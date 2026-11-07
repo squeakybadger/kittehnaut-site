@@ -105,6 +105,20 @@
   /* Landscape shots: two to a row, then one with a peek of the next. */
   @media (max-width:640px){ :root{--per:1.12; --gap:12px} .nav{width:38px; height:38px; font-size:20px} }
 
+  .video{
+    display:block; position:relative; width:100%; max-width:880px; margin:clamp(28px,6vw,44px) auto 0;
+    aspect-ratio:16/9; overflow:hidden; border-radius:clamp(12px,2.4vw,20px);
+    border:2px solid var(--edge); box-shadow:var(--shadow); background:var(--card);
+  }
+  .video img,.video iframe{position:absolute; inset:0; width:100%; height:100%; border:0; object-fit:cover; display:block}
+  .video .play{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:clamp(64px,12vw,92px); height:clamp(64px,12vw,92px); border-radius:50%;
+    background:var(--orange); border:2px solid var(--edge); box-shadow:var(--shadow);
+    display:grid; place-items:center;
+  }
+  .video .play svg{width:46%; height:46%; fill:#fff; margin-left:6%}
+
   section{padding:clamp(24px,6vw,36px) 0}
   h2{font-size:clamp(25px,6vw,34px); font-weight:900; margin:0 0 18px; text-align:center}
   .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
@@ -148,6 +162,13 @@
   </div>
   <p class="note">Draw a line. Ride it to the stars.</p>
 </header>
+
+<div class="wrap">
+  <a class="video" id="video" href="https://youtu.be/LykFXLQiwcY" aria-label="Play the Kittehnaut gameplay video">
+    <img src="img/06_black_hole.webp" alt="" width="1200" height="675">
+    <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2.5v19l16-9.5z"/></svg></span>
+  </a>
+</div>
 
 <div class="gallery">
   <button class="nav prev" type="button" aria-label="Previous screenshots">&lsaquo;</button>
@@ -209,6 +230,24 @@
 </footer>
 
 <script>
+  // YouTube loads only when the video is played, so a visit alone sends
+  // nothing to Google.
+  (function () {
+    var video = document.getElementById('video');
+    video.addEventListener('click', function (e) {
+      e.preventDefault();
+      var frame = document.createElement('iframe');
+      frame.src = 'https://www.youtube-nocookie.com/embed/LykFXLQiwcY?autoplay=1&rel=0';
+      frame.title = 'Kittehnaut gameplay video';
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.referrerPolicy = 'strict-origin-when-cross-origin';
+      var box = document.createElement('div');
+      box.className = 'video';
+      box.appendChild(frame);
+      video.replaceWith(box);
+    });
+  })();
+
   (function () {
     var strip = document.getElementById('shots');
     var prev = document.querySelector('.nav.prev');
